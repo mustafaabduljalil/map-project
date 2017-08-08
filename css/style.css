@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    display: flex;
+    /*height: 1000px;*/
+}
+/* Location List */
+.sidebar-heading {
+    color: #0ff;
+    font-style: italic;
+    text-align: center;
+}
+
+.location-list {
+    margin-top: 2em;
+}
+.location-list p {
+    font-size: 14px;
+    cursor: context-menu;
+    padding: 0.5em 1em 1em;
+    border-bottom: 1px solid #333;
+}
+.location-list p:nth-last-child(1) {
+    border: none;
+}
+/* Map */
+.map {
+    display: inline-block;
+    width: 100vw;
+    vertical-align: top;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+#map {
+    display: inline-block;
+    height: calc(100vh - 50px);
+    width: 100%;
+}
+.display-block {
+    display: block !important;
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    color: #fff;
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.sidenav ul {
+    margin-top: 20px;
+}
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.item {
+    cursor: pointer;
+}
+
+/*Loading page code*/
+.loading-page{
+    position: fixed;
+    z-index: 10000000;
+    width: 100%;
+    height: 100%;
+    background-color: #ffa500;
+    top: 0;
+    left: 0;
+}
+
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+.double-bounce1, .double-bounce2 {
+    top: 18%;
+
+}
+.text-loading{
+    margin-top:  14%;
+}
+
+
+.text-loading .child-heading{
+    color: #f00;
+    text-align: center;
+}
