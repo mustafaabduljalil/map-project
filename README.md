@@ -8,7 +8,8 @@
     -Download the .zip file 
     -Extract .zip file
     -Open index.html file in browser       
-
+    OR
+    -Clone this repo  https://github.com/mustafaabduljalil/map-project.git
 
 ##References
     -Knockout javascript framework [knockoutjs.com]
