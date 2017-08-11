@@ -190,7 +190,7 @@ self.userInput = ko.observable('');
       if (data.name.toLowerCase().indexOf(UserInput) !== -1) {
         self.places.push(data);
       }
-    })
+    });
 },
     //to display infowindo of chosen search results  
     this.info =function(name) {
@@ -201,7 +201,7 @@ self.userInput = ko.observable('');
                 google.maps.event.trigger(markers()[j], 'click');
             }
         }
-    }
+    };
 }
 
 ko.applyBindings(new AppViewModel());
