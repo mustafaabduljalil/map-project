@@ -10,10 +10,13 @@
         <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="js/knockout-3.4.2.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQVIeNmtMCtXzXH_To8dzmma5-QAiQQxo&v=3&callback=initMap" async defer onerror="mapError()">
+        </script>
         <script type="text/javascript" src="js/script.js"></script>
+
     </head>
     <body>
-        <div class="loading-page text-center">
+<!--         <div class="loading-page text-center">
             <div class="text-loading">
                 <h2>Welcome To Alexandria</h2>
                 <h4 class="child-heading">Please Be Patient...</h4>
@@ -23,12 +26,11 @@
               <div class="double-bounce1"></div>
               <div class="double-bounce2"></div>
             </div>
-        </div>
+        </div> -->
         <!-- Map -->
         <div class="container-fluid">
             <div class="row">
                 <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="list">&#9776;</span>
-
                  <div id="mySidenav" class="sidenav">
                   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <h4>Find your bank in Alexandria</h4>
@@ -44,7 +46,7 @@
                 </section>
             </div>
         </div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQVIeNmtMCtXzXH_To8dzmma5-QAiQQxo&v=3&callback=initMap" async defer onerror="mapError()">
-        </script>
+
     </body>
 </html>
+
