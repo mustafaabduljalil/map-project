@@ -1,4 +1,3 @@
-// Array that has locations data
 var locations = [
     {
         name: 'National Bank of Egypt', 
@@ -7,28 +6,28 @@ var locations = [
     },                   
 
     {
-        name: 'CBI', 
-        address: 'Al Mansheyah Al Kubra, Qesm Al Mansheyah, Alexandria Governorate, Egypt', 
-        workTime: '8.30AM To 5PM',location: {lat: 31.2252035, lng: 29.9333018},website: 'cibeg.com'
+        name: 'CIB Bank', 
+        address: 'San Stifano, Qesm AR Ramel, Alexandria Governorate, Egypt', 
+        workTime: '8.30AM To 5PM',location: {lat: 31.2456544, lng: 29.9636007},website: 'cibeg.com'
     }, 
 
 
     {
         name: 'Alexandria Bank', 
-        address: '172 Omar Lotfy, Al Ibrahimeyah Bahri WA Sidi Gaber, Qesm Bab Sharqi, Alexandria Governorate, Egypt', 
-        workTime: '9PM To 5PM',location: {lat: 31.2339727, lng: 29.9333016},website: 'alexbank.com'
+        address: 'Fleming, Qesm AR Ramel, Alexandria Governorate, Egypt', 
+        workTime: '9PM To 5PM',location: {lat: 31.2445894, lng: 29.9618572},website: 'alexbank.com'
     }, 
 
     {
         name: 'Banque Du Caire', 
-        address: '49 ش عمر لطفى، كامب شيزار، Qesm Bab Sharqi, Alexandria Governorate, Egyp', 
-        workTime: '8AM To 4PM',location: {lat: 31.2339348, lng: 29.9329581},website: 'banqueducaire.com'
+        address: 'Al Amrawi Qism El-Montaza Alexandria Governorate Egypt', 
+        workTime: '8AM To 4PM',location: {lat: 31.2820751, lng: 30.0191353},website: 'banqueducaire.com'
     }, 
 
     {
         name: 'Arab African International Bank - AAIB', 
-        address: '74 ش البرت الاول، سموحة، Qism Sidi Gabir, Alexandria Governorate, Egypt', 
-        workTime: '11AM To 6PM',location: {lat: 31.2338968, lng: 29.9326145},website: 'aaib.com'
+        address: '606 طريق الحرية، جليم، Qism El-Raml, Alexandria Governorate, Egypt', 
+        workTime: '11AM To 6PM',location: {lat: 31.246131, lng: 29.9592393},website: 'aaib.com'
     }, 
 
     {
@@ -50,7 +49,7 @@ var locations = [
 ];
 
 //markers array to store marker
-var markers = ko.observableArray(locations);
+var markers = ko.observableArray([]);
 
 //initalization of google map
 function initMap() {
@@ -84,7 +83,6 @@ function initMap() {
         });
         markers.push(marker);
         //click event to display info window of each marker of each location 
-
         marker.addListener('click', function () {
             populateInfoWindow(this, largeInfowindow);
         });
@@ -108,9 +106,11 @@ function populateInfoWindow(marker, infowindow) {
             dataType: "jsonp",
             success: function(response) {
                 var results = response[1];
+                // var bankName = results[0].replace(" ","_");
+                console.log(results[0]);
                 var url = 'http://en.wikipedia.org/wiki/' + results[0];
                 
-                    infowindow.setContent('<ul class="infowindow"><li class="h4">' + marker.name + '</li><li>Address: ' + marker.address + '</li><li>website: <a href='+marker.website+''+ marker.name + '</a></li><li>WorkTime: '+ marker.workTime +'</li><a href="'+url+'" target="_blank"> wikipedia result </a></ul>');
+                    infowindow.setContent('<ul class="infowindow"><li class="h4">' + marker.name + '</li><li>Address: ' + marker.address + '</li><li>website: '+ marker.website + '</li><li>WorkTime: '+ marker.workTime +'</li><a href="'+url+'" target="_blank"> wikipedia result </a></ul>');
             },
             error:function(){
                 alert('Ops, there is something is wrong');
@@ -143,7 +143,7 @@ $(document).ready(function(){
     },                   
 
     {
-        name: 'CBI', 
+        name: 'CIB Bank', 
         address: 'Al Mansheyah Al Kubra, Qesm Al Mansheyah, Alexandria Governorate, Egypt', 
         workTime: '8.30AM To 5PM',location: {lat: 31.2252035, lng: 29.9333018},website: 'cibeg.com'
     }, 
@@ -192,8 +192,8 @@ self.userInput = ko.observable('');
     self.searchable().forEach(function(data) {
       if (data.name.toLowerCase().indexOf(UserInput) !== -1) {
         self.places.push(data);
-        console.log();
-    	}
+      }
+
     });
 },
     //to display infowindo of chosen search results  
@@ -209,6 +209,7 @@ self.userInput = ko.observable('');
 }
 
 ko.applyBindings(new AppViewModel());
+
 
 });
 
@@ -228,7 +229,7 @@ function closeNav() {
 
 }
 
-$(window).on('load',function(){
+// $(window).on('load',function(){
 
-        $('.loading-page').fadeOut(4000);
-});
+//         $('.loading-page').fadeOut(4000);
+// });
