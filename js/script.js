@@ -1,46 +1,46 @@
 // Array that has locations data
 var locations = [
     {
-        name: 'Balbaa Restaurant', 
-        address: '2 Mohammed Abd Al Salam No 1, Sidi Beshr Qebli, Qism El-Montaza, Alexandria Governorate, Egypt', 
-        workTime: '9AM To 4AM',location: {lat: 31.2551539, lng: 29.9878924},phone: '+203 5497555'
+        name: 'National Bank of Egypt', 
+        address: '26 Salah Salem, Al Attarin Sharq, Qesm Al Attarin, Alexandria Governorate, Egypt', 
+        workTime: '8.30AM To 4.30PM',location: {lat: 31.2252414, lng: 29.9336453},website: 'nbe.com.eg'
     },                   
 
     {
-        name: 'Asmak Shaaban', 
+        name: 'CBI', 
         address: 'Al Mansheyah Al Kubra, Qesm Al Mansheyah, Alexandria Governorate, Egypt', 
-        workTime: '10AM To 1AM',location: {lat: 31.1989356, lng: 29.8865508},phone: '+20 114 401 9921'
+        workTime: '8.30AM To 5PM',location: {lat: 31.2252035, lng: 29.9333018},website: 'cibeg.com'
     }, 
 
 
     {
-        name: 'kadoura Restaurant', 
-        address: '47  26 July street، Almanshya، Qism El-Mansheya, Alexandria Governorate, Egypt', 
-        workTime: '12PM To 12:15AM',location: {lat: 31.2013308, lng: 29.888077},phone: '+203 4800967'
+        name: 'Alexandria Bank', 
+        address: '172 Omar Lotfy, Al Ibrahimeyah Bahri WA Sidi Gaber, Qesm Bab Sharqi, Alexandria Governorate, Egypt', 
+        workTime: '9PM To 5PM',location: {lat: 31.2339727, lng: 29.9333016},website: 'alexbank.com'
     }, 
 
     {
-        name: 'Houda Gondel Restaurant', 
-        address: 'Al Mansheyah Al Kubra, Qesm Al Mansheyah, Alexandria Governorate, Egypt', 
-        workTime: '10AM To 12AM',location: {lat: 31.2034557, lng: 29.906636},phone: '+20 122 283 4511'
+        name: 'Banque Du Caire', 
+        address: '49 ش عمر لطفى، كامب شيزار، Qesm Bab Sharqi, Alexandria Governorate, Egyp', 
+        workTime: '8AM To 4PM',location: {lat: 31.2339348, lng: 29.9329581},website: 'banqueducaire.com'
     }, 
 
     {
-        name: 'Asmak Farag', 
-        address: 'Souq at Tork, Qesm Al Mansheyah, Alexandria Governorate, Egypt', 
-        workTime: '11AM To 6AM',location: {lat: 31.200097, lng: 29.888},phone: '+203 4811047'
+        name: 'Arab African International Bank - AAIB', 
+        address: '74 ش البرت الاول، سموحة، Qism Sidi Gabir, Alexandria Governorate, Egypt', 
+        workTime: '11AM To 6PM',location: {lat: 31.2338968, lng: 29.9326145},website: 'aaib.com'
     }, 
 
     {
-        name: 'Samakmak Al-bahr Restaurant', 
-        address: '60 Sidi Yakout, As Sayalah Gharb, Qesm Al Gomrok, Alexandria Governorate, Egypt', 
-        workTime: '10AM To 2AM',location: {lat: 31.2075602, lng: 29.8780888},phone: '+203 4809523'
+        name: 'Credit Agricole Bank - Smouha Branch', 
+        address: 'Ezbet El-Nozha, Qism Sidi Gabir, Alexandria Governorate, Egypt', 
+        workTime: '8.30AM To 4.30PM',location: {lat: 31.2102253, lng: 29.9595023},website: 'ca-egypt.com'
     },          
 
     {
-        name: 'Elaa Restaurant', 
-        address: '3 Kasr Al Tin, Ras at Tin, Qesm Al Gomrok, Alexandria Governorate, Egypt', 
-        workTime: '12Pm To 1AM',location: {lat: 31.210168, lng: 29.8769975},phone: '+20 127 444 6887'
+        name: 'Blom Bank Egypt', 
+        address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', 
+        workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'
     },
 
 
@@ -50,7 +50,7 @@ var locations = [
 ];
 
 //markers array to store marker
-var markers = ko.observableArray([]);
+var markers = ko.observableArray(locations);
 
 //initalization of google map
 function initMap() {
@@ -63,27 +63,28 @@ function initMap() {
     var j=0;
     while(j < locations.length){
         var position = locations[j].location;
-        var phone = locations[j].phone;
+        var website = locations[j].website;
         var address = locations[j].address;
         var name = locations[j].name;
         var workTime = locations[j].workTime;
-        insertMarker(j,position,name,phone,address,workTime);
+        insertMarker(j,position,name,website,address,workTime);
         j++;
     }
 
     //push each marker of location in arrayin marker
-    function insertMarker(id,position,name,phone,address,workTime) {
+    function insertMarker(id,position,name,website,address,workTime) {
         var marker = new google.maps.Marker({
             map: map,
             position: position,
             name:name,
-            phone:phone,
+            website:website,
             address:address,
             workTime:workTime,
             id: id
         });
         markers.push(marker);
         //click event to display info window of each marker of each location 
+
         marker.addListener('click', function () {
             populateInfoWindow(this, largeInfowindow);
         });
@@ -109,7 +110,7 @@ function populateInfoWindow(marker, infowindow) {
                 var results = response[1];
                 var url = 'http://en.wikipedia.org/wiki/' + results[0];
                 
-                    infowindow.setContent('<ul class="infowindow"><li class="h4">' + marker.name + '</li><li>Address: ' + marker.address + '</li><li>Phone: '+ marker.phone + '</li><li>WorkTime: '+ marker.workTime +'</li><a href="'+url+'" target="_blank"> wikipedia result </a></ul>');
+                    infowindow.setContent('<ul class="infowindow"><li class="h4">' + marker.name + '</li><li>Address: ' + marker.address + '</li><li>website: <a href='+marker.website+''+ marker.name + '</a></li><li>WorkTime: '+ marker.workTime +'</li><a href="'+url+'" target="_blank"> wikipedia result </a></ul>');
             },
             error:function(){
                 alert('Ops, there is something is wrong');
@@ -117,6 +118,8 @@ function populateInfoWindow(marker, infowindow) {
         });
         //open info window of marker
         infowindow.open(map, marker);  
+        marker.setAnimation(google.maps.Animation.DROP);
+
         //call close window method to close infowindow of marker       
         closeWindow(infowindow);
 }
@@ -134,46 +137,46 @@ $(document).ready(function(){
 
      self.searchable= ko.observableArray([
     {
-        name: 'Balbaa Restaurant', 
-        address: '2 Mohammed Abd Al Salam No 1, Sidi Beshr Qebli, Qism El-Montaza, Alexandria Governorate, Egypt', 
-        workTime: '9AM To 4AM',location: {lat: 31.2551539, lng: 29.9878924},phone: '+203 5497555'
+        name: 'National Bank of Egypt', 
+        address: '26 Salah Salem, Al Attarin Sharq, Qesm Al Attarin, Alexandria Governorate, Egypt', 
+        workTime: '8.30AM To 4.30PM',location: {lat: 31.2252414, lng: 29.9336453},website: 'nbe.com.eg'
     },                   
 
     {
-        name: 'Asmak Shaaban', 
+        name: 'CBI', 
         address: 'Al Mansheyah Al Kubra, Qesm Al Mansheyah, Alexandria Governorate, Egypt', 
-        workTime: '10AM To 1AM',location: {lat: 31.1989356, lng: 29.8865508},phone: '+20 114 401 9921'
+        workTime: '8.30AM To 5PM',location: {lat: 31.2252035, lng: 29.9333018},website: 'cibeg.com'
     }, 
 
 
     {
-        name: 'kadoura Restaurant', 
-        address: '47  26 July street، Almanshya، Qism El-Mansheya, Alexandria Governorate, Egypt', 
-        workTime: '12PM To 12:15AM',location: {lat: 31.2013308, lng: 29.888077},phone: '+203 4800967'
+        name: 'Alexandria Bank', 
+        address: '172 Omar Lotfy, Al Ibrahimeyah Bahri WA Sidi Gaber, Qesm Bab Sharqi, Alexandria Governorate, Egypt', 
+        workTime: '9PM To 5PM',location: {lat: 31.2339727, lng: 29.9333016},website: 'alexbank.com'
     }, 
 
     {
-        name: 'Houda Gondel Restaurant', 
-        address: 'Al Mansheyah Al Kubra, Qesm Al Mansheyah, Alexandria Governorate, Egypt', 
-        workTime: '10AM To 12AM',location: {lat: 31.2034557, lng: 29.906636},phone: '+20 122 283 4511'
+        name: 'Banque Du Caire', 
+        address: '49 ش عمر لطفى، كامب شيزار، Qesm Bab Sharqi, Alexandria Governorate, Egyp', 
+        workTime: '8AM To 4PM',location: {lat: 31.2339348, lng: 29.9329581},website: 'banqueducaire.com'
     }, 
 
     {
-        name: 'Asmak Farag', 
-        address: 'Souq at Tork, Qesm Al Mansheyah, Alexandria Governorate, Egypt', 
-        workTime: '11AM To 6AM',location: {lat: 31.200097, lng: 29.888},phone: '+203 4811047'
+        name: 'Arab African International Bank - AAIB', 
+        address: '74 ش البرت الاول، سموحة، Qism Sidi Gabir, Alexandria Governorate, Egypt', 
+        workTime: '11AM To 6PM',location: {lat: 31.2338968, lng: 29.9326145},website: 'aaib.com'
     }, 
 
     {
-        name: 'Samakmak Al-bahr Restaurant', 
-        address: '60 Sidi Yakout, As Sayalah Gharb, Qesm Al Gomrok, Alexandria Governorate, Egypt', 
-        workTime: '10AM To 2AM',location: {lat: 31.2075602, lng: 29.8780888},phone: '+203 4809523'
+        name: 'Credit Agricole Bank - Smouha Branch', 
+        address: 'Ezbet El-Nozha, Qism Sidi Gabir, Alexandria Governorate, Egypt', 
+        workTime: '8.30AM To 4.30PM',location: {lat: 31.2102253, lng: 29.9595023},website: 'ca-egypt.com'
     },          
 
     {
-        name: 'Elaa Restaurant', 
-        address: '3 Kasr Al Tin, Ras at Tin, Qesm Al Gomrok, Alexandria Governorate, Egypt', 
-        workTime: '12Pm To 1AM',location: {lat: 31.210168, lng: 29.8769975},phone: '+20 127 444 6887'
+        name: 'Blom Bank Egypt', 
+        address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', 
+        workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'
     },
 ]);
 
@@ -189,15 +192,16 @@ self.userInput = ko.observable('');
     self.searchable().forEach(function(data) {
       if (data.name.toLowerCase().indexOf(UserInput) !== -1) {
         self.places.push(data);
-      }
+        console.log();
+    	}
     });
 },
     //to display infowindo of chosen search results  
     this.info =function(name) {
-        var restaurants = markers();
+        var banks = markers();
         // select the marker that has a matching title and open it
-        for (var j in restaurants) {
-            if(restaurants[j].name === name) {
+        for (var j in banks) {
+            if(banks[j].name === name) {
                 google.maps.event.trigger(markers()[j], 'click');
             }
         }
@@ -205,7 +209,6 @@ self.userInput = ko.observable('');
 }
 
 ko.applyBindings(new AppViewModel());
-
 
 });
 
