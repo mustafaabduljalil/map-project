@@ -193,23 +193,24 @@ self.userInput = ko.observable('');
       if (data.name.toLowerCase().indexOf(UserInput) !== -1) {
           var banks = markers();
           for (var j in banks) {
-                  banks[j].setVisible(false)
+                  banks[j].setVisible(false);
 
           }
-          for (var j in banks) {
-              if(banks[j].name === data.name) {
-                  banks[j].setVisible(true)
+          for (var i in banks) {
+              if(banks[i].name === data.name) {
+                  banks[i].setVisible(true);
               }
           }
 
         self.places.push(data);
-      }
-        if(UserInput.length==0){
-            for (var j in banks) {
-                banks[j].setVisible(true)
+                  if(UserInput.length===0){
+            for (var k in banks) {
+                banks[k].setVisible(true);
 
             }
         }
+      }
+
 
 
             });
