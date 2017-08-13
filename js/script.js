@@ -197,8 +197,9 @@ self.userInput = ko.observable('');
 
           }
           for (var i in banks) {
-              if(banks[i].name === data.name) {
-                  banks[i].setVisible(true);
+              var search_name=banks[i].name;
+              if(search_name.includes(UserInput)) {
+                  banks[i].setVisible(true)
               }
           }
 
