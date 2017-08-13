@@ -103,8 +103,7 @@ $(document).ready(function(){
     {name: 'Banque du Caire',address: 'Al Amrawi Qism El-Montaza Alexandria Governorate Egypt', workTime: '8AM To 4PM',location: {lat: 31.2820751, lng: 30.0191353},website: 'banqueducaire.com'}, 
     {name: 'Arab International Bank',address: '606 طريق الحرية، جليم، Qism El-Raml, Alexandria Governorate, Egypt',workTime: '11AM To 6PM',location: {lat: 31.246131, lng: 29.9592393},website: 'aaib.com'}, 
     {name: 'Crédit Agricole',address: 'Ezbet El-Nozha, Qism Sidi Gabir, Alexandria Governorate, Egypt',workTime: '8.30AM To 4.30PM',location: {lat: 31.2102253, lng: 29.9595023},website: 'ca-egypt.com'},          
-    {name: 'Blom',address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'}
-    ,
+    {name: 'Blom',address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'},
 ]);
 
      self.places = ko.observableArray(locations);
