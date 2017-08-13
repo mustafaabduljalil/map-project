@@ -13,31 +13,31 @@ var locations = [
 
 
     {
-        name: 'Alexandria Bank', 
+        name: 'Bank of Alexandria',
         address: 'Fleming, Qesm AR Ramel, Alexandria Governorate, Egypt', 
         workTime: '9PM To 5PM',location: {lat: 31.2445894, lng: 29.9618572},website: 'alexbank.com'
     }, 
 
     {
-        name: 'Banque Du Caire', 
+        name: 'Banque du Caire',
         address: 'Al Amrawi Qism El-Montaza Alexandria Governorate Egypt', 
         workTime: '8AM To 4PM',location: {lat: 31.2820751, lng: 30.0191353},website: 'banqueducaire.com'
     }, 
 
     {
-        name: 'Arab African International Bank - AAIB', 
+        name: 'Arab International Bank',
         address: '606 طريق الحرية، جليم، Qism El-Raml, Alexandria Governorate, Egypt', 
         workTime: '11AM To 6PM',location: {lat: 31.246131, lng: 29.9592393},website: 'aaib.com'
     }, 
 
     {
-        name: 'Credit Agricole Bank - Smouha Branch', 
+        name: 'Crédit Agricole',
         address: 'Ezbet El-Nozha, Qism Sidi Gabir, Alexandria Governorate, Egypt', 
         workTime: '8.30AM To 4.30PM',location: {lat: 31.2102253, lng: 29.9595023},website: 'ca-egypt.com'
     },          
 
     {
-        name: 'Blom Bank Egypt', 
+        name: 'Blom',
         address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', 
         workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'
     },
@@ -107,7 +107,6 @@ function populateInfoWindow(marker, infowindow) {
             success: function(response) {
                 var results = response[1];
                 // var bankName = results[0].replace(" ","_");
-                console.log(results[0]);
                 var url = 'http://en.wikipedia.org/wiki/' + results[0];
                 
                     infowindow.setContent('<ul class="infowindow"><li class="h4">' + marker.name + '</li><li>Address: ' + marker.address + '</li><li>website: '+ marker.website + '</li><li>WorkTime: '+ marker.workTime +'</li><a href="'+url+'" target="_blank"> wikipedia result </a></ul>');
@@ -185,16 +184,35 @@ $(document).ready(function(){
 
 
 self.userInput = ko.observable('');
+
   self.filterNames = function() {
     //convert search input to lowercase then search in array of location about identicl name
     UserInput = self.userInput().toLowerCase();
     self.places.removeAll();
     self.searchable().forEach(function(data) {
       if (data.name.toLowerCase().indexOf(UserInput) !== -1) {
+          var banks = markers();
+          for (var j in banks) {
+                  banks[j].setVisible(false)
+
+          }
+          for (var j in banks) {
+              if(banks[j].name === data.name) {
+                  banks[j].setVisible(true)
+              }
+          }
+
         self.places.push(data);
       }
+        if(UserInput.length==0){
+            for (var j in banks) {
+                banks[j].setVisible(true)
 
-    });
+            }
+        }
+
+
+            });
 },
     //to display infowindo of chosen search results  
     this.info =function(name) {
