@@ -103,7 +103,8 @@ $(document).ready(function(){
     {name: 'Banque du Caire',address: 'Al Amrawi Qism El-Montaza Alexandria Governorate Egypt', workTime: '8AM To 4PM',location: {lat: 31.2820751, lng: 30.0191353},website: 'banqueducaire.com'}, 
     {name: 'Arab International Bank',address: '606 طريق الحرية، جليم، Qism El-Raml, Alexandria Governorate, Egypt',workTime: '11AM To 6PM',location: {lat: 31.246131, lng: 29.9592393},website: 'aaib.com'}, 
     {name: 'Crédit Agricole',address: 'Ezbet El-Nozha, Qism Sidi Gabir, Alexandria Governorate, Egypt',workTime: '8.30AM To 4.30PM',location: {lat: 31.2102253, lng: 29.9595023},website: 'ca-egypt.com'},          
-    {name: 'Blom',address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'},
+    {name: 'Blom',address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'}
+    ,
 ]);
 
      self.places = ko.observableArray(locations);
@@ -119,24 +120,25 @@ self.userInput = ko.observable('');
     self.searchable().forEach(function(data) {
       if (data.name.toLowerCase().indexOf(UserInput) !== -1) {
           var banks = markers();
-          for (var j = 0; j<banks.length;j++) {
-                  banks[j].setVisible(false);
+            for (var j = 0;j<banks.length;j++) {
+                banks[j].setVisible(false);
 
-          }
-          for (var i = 0; i<banks.length;i++) {
-              var search_name=banks[i].name;
-              if(search_name.includes(UserInput)) {
-                  banks[i].setVisible(true);
-              }
-          }
+            }
 
-        self.places.push(data);
+            for (var i = 0; i < banks.length; i++) {
+                if (!banks[i].name.toLowerCase().includes(UserInput.toLowerCase())) {
+                    banks[i].setVisible(false);
+                } else {
+                    banks[i].setVisible(true);
+                }
+            }
            	if(UserInput.length===0){
-	            for (var k = 0; k<banks.length;k++) {
-	                banks[k].setVisible(true);
+                for (var k = 0;k<banks.length;k++) {
+                    banks[k].setVisible(true);
+                }
+            }
+            self.places.push(data);
 
-	            }
-        }
       }
 
     });
