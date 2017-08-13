@@ -199,7 +199,7 @@ self.userInput = ko.observable('');
           for (var i in banks) {
               var search_name=banks[i].name;
               if(search_name.includes(UserInput)) {
-                  banks[i].setVisible(true)
+                  banks[i].setVisible(true);
               }
           }
 
