@@ -1,54 +1,15 @@
 var locations = [
-    {
-        name: 'National Bank of Egypt', 
-        address: '26 Salah Salem, Al Attarin Sharq, Qesm Al Attarin, Alexandria Governorate, Egypt', 
-        workTime: '8.30AM To 4.30PM',location: {lat: 31.2252414, lng: 29.9336453},website: 'nbe.com.eg'
-    },                   
-
-    {
-        name: 'CIB Bank', 
-        address: 'San Stifano, Qesm AR Ramel, Alexandria Governorate, Egypt', 
-        workTime: '8.30AM To 5PM',location: {lat: 31.2456544, lng: 29.9636007},website: 'cibeg.com'
-    }, 
-
-
-    {
-        name: 'Bank of Alexandria',
-        address: 'Fleming, Qesm AR Ramel, Alexandria Governorate, Egypt', 
-        workTime: '9PM To 5PM',location: {lat: 31.2445894, lng: 29.9618572},website: 'alexbank.com'
-    }, 
-
-    {
-        name: 'Banque du Caire',
-        address: 'Al Amrawi Qism El-Montaza Alexandria Governorate Egypt', 
-        workTime: '8AM To 4PM',location: {lat: 31.2820751, lng: 30.0191353},website: 'banqueducaire.com'
-    }, 
-
-    {
-        name: 'Arab International Bank',
-        address: '606 طريق الحرية، جليم، Qism El-Raml, Alexandria Governorate, Egypt', 
-        workTime: '11AM To 6PM',location: {lat: 31.246131, lng: 29.9592393},website: 'aaib.com'
-    }, 
-
-    {
-        name: 'Crédit Agricole',
-        address: 'Ezbet El-Nozha, Qism Sidi Gabir, Alexandria Governorate, Egypt', 
-        workTime: '8.30AM To 4.30PM',location: {lat: 31.2102253, lng: 29.9595023},website: 'ca-egypt.com'
-    },          
-
-    {
-        name: 'Blom',
-        address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', 
-        workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'
-    },
-
-
-
-
-
-];
+    {name: 'National Bank of Egypt',address: '26 Salah Salem, Al Attarin Sharq, Qesm Al Attarin, Alexandria Governorate, Egypt', workTime: '8.30AM To 4.30PM',location: {lat: 31.2252414, lng: 29.9336453},website: 'nbe.com.eg'},                   
+    {name: 'CIB Bank',address: 'San Stifano, Qesm AR Ramel, Alexandria Governorate, Egypt', workTime: '8.30AM To 5PM',location: {lat: 31.2456544, lng: 29.9636007},website: 'cibeg.com'},
+    {name: 'Bank of Alexandria',address: 'Fleming, Qesm AR Ramel, Alexandria Governorate, Egypt', workTime: '9PM To 5PM',location: {lat: 31.2445894, lng: 29.9618572},website: 'alexbank.com'}, 
+    {name: 'Banque du Caire',address: 'Al Amrawi Qism El-Montaza Alexandria Governorate Egypt', workTime: '8AM To 4PM',location: {lat: 31.2820751, lng: 30.0191353},website: 'banqueducaire.com'}, 
+    {name: 'Arab International Bank',address: '606 طريق الحرية، جليم، Qism El-Raml, Alexandria Governorate, Egypt',workTime: '11AM To 6PM',location: {lat: 31.246131, lng: 29.9592393},website: 'aaib.com'}, 
+    {name: 'Crédit Agricole',address: 'Ezbet El-Nozha, Qism Sidi Gabir, Alexandria Governorate, Egypt',workTime: '8.30AM To 4.30PM',location: {lat: 31.2102253, lng: 29.9595023},website: 'ca-egypt.com'},          
+    {name: 'Blom',address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'}
+    ];
 
 //markers array to store marker
+	var locationsArray = locations;
 var markers = ko.observableArray([]);
 
 //initalization of google map
@@ -110,11 +71,12 @@ function populateInfoWindow(marker, infowindow) {
                 var url = 'http://en.wikipedia.org/wiki/' + results[0];
                 
                     infowindow.setContent('<ul class="infowindow"><li class="h4">' + marker.name + '</li><li>Address: ' + marker.address + '</li><li>website: '+ marker.website + '</li><li>WorkTime: '+ marker.workTime +'</li><a href="'+url+'" target="_blank"> wikipedia result </a></ul>');
-            },
-            error:function(){
-                alert('Ops, there is something is wrong');
             }
-        });
+        }) .fail(function() {
+    // handle error here
+            alert('Ops, there is something is wrong');
+
+  		});
         //open info window of marker
         infowindow.open(map, marker);  
         marker.setAnimation(google.maps.Animation.DROP);
@@ -135,48 +97,14 @@ $(document).ready(function(){
     var self = this;
 
      self.searchable= ko.observableArray([
-    {
-        name: 'National Bank of Egypt', 
-        address: '26 Salah Salem, Al Attarin Sharq, Qesm Al Attarin, Alexandria Governorate, Egypt', 
-        workTime: '8.30AM To 4.30PM',location: {lat: 31.2252414, lng: 29.9336453},website: 'nbe.com.eg'
-    },                   
-
-    {
-        name: 'CIB Bank', 
-        address: 'Al Mansheyah Al Kubra, Qesm Al Mansheyah, Alexandria Governorate, Egypt', 
-        workTime: '8.30AM To 5PM',location: {lat: 31.2252035, lng: 29.9333018},website: 'cibeg.com'
-    }, 
-
-
-    {
-        name: 'Alexandria Bank', 
-        address: '172 Omar Lotfy, Al Ibrahimeyah Bahri WA Sidi Gaber, Qesm Bab Sharqi, Alexandria Governorate, Egypt', 
-        workTime: '9PM To 5PM',location: {lat: 31.2339727, lng: 29.9333016},website: 'alexbank.com'
-    }, 
-
-    {
-        name: 'Banque Du Caire', 
-        address: '49 ش عمر لطفى، كامب شيزار، Qesm Bab Sharqi, Alexandria Governorate, Egyp', 
-        workTime: '8AM To 4PM',location: {lat: 31.2339348, lng: 29.9329581},website: 'banqueducaire.com'
-    }, 
-
-    {
-        name: 'Arab African International Bank - AAIB', 
-        address: '74 ش البرت الاول، سموحة، Qism Sidi Gabir, Alexandria Governorate, Egypt', 
-        workTime: '11AM To 6PM',location: {lat: 31.2338968, lng: 29.9326145},website: 'aaib.com'
-    }, 
-
-    {
-        name: 'Credit Agricole Bank - Smouha Branch', 
-        address: 'Ezbet El-Nozha, Qism Sidi Gabir, Alexandria Governorate, Egypt', 
-        workTime: '8.30AM To 4.30PM',location: {lat: 31.2102253, lng: 29.9595023},website: 'ca-egypt.com'
-    },          
-
-    {
-        name: 'Blom Bank Egypt', 
-        address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', 
-        workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'
-    },
+    {name: 'National Bank of Egypt',address: '26 Salah Salem, Al Attarin Sharq, Qesm Al Attarin, Alexandria Governorate, Egypt', workTime: '8.30AM To 4.30PM',location: {lat: 31.2252414, lng: 29.9336453},website: 'nbe.com.eg'},                   
+    {name: 'CIB Bank',address: 'San Stifano, Qesm AR Ramel, Alexandria Governorate, Egypt', workTime: '8.30AM To 5PM',location: {lat: 31.2456544, lng: 29.9636007},website: 'cibeg.com'},
+    {name: 'Bank of Alexandria',address: 'Fleming, Qesm AR Ramel, Alexandria Governorate, Egypt', workTime: '9PM To 5PM',location: {lat: 31.2445894, lng: 29.9618572},website: 'alexbank.com'}, 
+    {name: 'Banque du Caire',address: 'Al Amrawi Qism El-Montaza Alexandria Governorate Egypt', workTime: '8AM To 4PM',location: {lat: 31.2820751, lng: 30.0191353},website: 'banqueducaire.com'}, 
+    {name: 'Arab International Bank',address: '606 طريق الحرية، جليم، Qism El-Raml, Alexandria Governorate, Egypt',workTime: '11AM To 6PM',location: {lat: 31.246131, lng: 29.9592393},website: 'aaib.com'}, 
+    {name: 'Crédit Agricole',address: 'Ezbet El-Nozha, Qism Sidi Gabir, Alexandria Governorate, Egypt',workTime: '8.30AM To 4.30PM',location: {lat: 31.2102253, lng: 29.9595023},website: 'ca-egypt.com'},          
+    {name: 'Blom',address: 'AR Riyadah, Qesm Sidi Gaber, Alexandria Governorate, Egypt', workTime: '8Pm To 4PM',location: {lat: 31.2102241, lng: 29.944133},website: 'blombankegypt.com'}
+    ,
 ]);
 
      self.places = ko.observableArray(locations);
@@ -192,11 +120,11 @@ self.userInput = ko.observable('');
     self.searchable().forEach(function(data) {
       if (data.name.toLowerCase().indexOf(UserInput) !== -1) {
           var banks = markers();
-          for (var j in banks) {
+          for (var j = 0; j<banks.length;j++) {
                   banks[j].setVisible(false);
 
           }
-          for (var i in banks) {
+          for (var i = 0; i<banks.length;i++) {
               var search_name=banks[i].name;
               if(search_name.includes(UserInput)) {
                   banks[i].setVisible(true);
@@ -204,23 +132,21 @@ self.userInput = ko.observable('');
           }
 
         self.places.push(data);
-                  if(UserInput.length===0){
-            for (var k in banks) {
-                banks[k].setVisible(true);
+           	if(UserInput.length===0){
+	            for (var k = 0; k<banks.length;k++) {
+	                banks[k].setVisible(true);
 
-            }
+	            }
         }
       }
 
-
-
-            });
+    });
 },
     //to display infowindo of chosen search results  
     this.info =function(name) {
         var banks = markers();
         // select the marker that has a matching title and open it
-        for (var j in banks) {
+        for (var j = 0; j<banks.length;j++) {
             if(banks[j].name === name) {
                 google.maps.event.trigger(markers()[j], 'click');
             }
