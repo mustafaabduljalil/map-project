@@ -116,13 +116,18 @@ self.userInput = ko.observable('');
     //convert search input to lowercase then search in array of location about identicl name
     UserInput = self.userInput().toLowerCase();
     self.places.removeAll();
+    var flag = 1;
     self.searchable().forEach(function(data) {
+
       if (data.name.toLowerCase().indexOf(UserInput) !== -1) {
+          flag = 0;
           var banks = markers();
             for (var j = 0;j<banks.length;j++) {
                 banks[j].setVisible(false);
 
             }
+
+
 
             for (var i = 0; i < banks.length; i++) {
                 if (!banks[i].name.toLowerCase().includes(UserInput.toLowerCase())) {
@@ -136,11 +141,19 @@ self.userInput = ko.observable('');
                     banks[k].setVisible(true);
                 }
             }
+
             self.places.push(data);
 
       }
 
     });
+    if(flag == 1) {
+        var banks = markers();
+        for (var j = 0;j<banks.length;j++) {
+            banks[j].setVisible(false);
+
+        }
+    }
 },
     //to display infowindo of chosen search results  
     this.info =function(name) {
@@ -174,8 +187,3 @@ function closeNav() {
     document.getElementById("mySidenav").style.padding = "0"; 
 
 }
-
-// $(window).on('load',function(){
-
-//         $('.loading-page').fadeOut(4000);
-// });
